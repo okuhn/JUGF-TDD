@@ -12,5 +12,5 @@ Beim Stammtisch werden wir nach einer kurzen Einführung in die Grundlagen der t
 
 # Über mich
 
-Dipl.Inform. Oliver Kuhn arbeitet seit 1996 bei der [SUBITO AG](http://www.subito.de), einem führenden Anbieter von Software für das Kredit- und Forderungsmanagement, derzeit als technischer Architekt für die Produkte des Forderungsmanagements. Zuvor studierte er Informatik an der TH Darmstadt (heute TU Darmstadt) mit dem Schwerpunkt Programmiersprachen und Compilerbau.
+Dipl.Inform. Oliver Kuhn arbeitet seit 1996 bei der [SUBITO AG](http://www.subito.de), einem führenden Anbieter von Software für das Kredit- und Forderungsmanagement, derzeit als technischer Architekt für die Produkte des Forderungsmanagements. Zuvor studierte er Informatik an der TH Darmstadt (heute [TU Darmstadt](http://www.tu-darmstadt.de)) mit dem Schwerpunkt Programmiersprachen und Compilerbau.
 
