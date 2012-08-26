@@ -13,7 +13,7 @@ public class ListSizeRangeTest {
 	
 	@Test
 	public void test() {
-		assertThat(lp.list(0), collectionWithinSizeRange(2,4));
+		assertThat(lp.list(2), collectionWithinSizeRange(2,4));
 	}
 
 }

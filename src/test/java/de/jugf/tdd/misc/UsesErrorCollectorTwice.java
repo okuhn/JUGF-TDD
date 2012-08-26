@@ -13,8 +13,8 @@ public class UsesErrorCollectorTwice {
 
 	@Test
 	public void example() {
-		collector.addError(new Throwable("first thing went wrong"));
-		collector.addError(new Throwable("second thing went wrong"));
+//		collector.addError(new Throwable("first thing went wrong"));
+//		collector.addError(new Throwable("second thing went wrong"));
 		collector.checkThat(getResult(), not(containsString("ERROR!")));
 		collector.checkThat(getResult(), not(containsString("Oops")));
 		collector.checkThat(getResult(), not(containsString("sorry")));
@@ -22,7 +22,7 @@ public class UsesErrorCollectorTwice {
 	}
 
 	private String getResult() {
-//		return "Everything is fine!";
-		return "Oops, sorry there's an ERROR!";
+		return "Everything is fine!";
+//		return "Oops, sorry there's an ERROR!";
 	}
 }

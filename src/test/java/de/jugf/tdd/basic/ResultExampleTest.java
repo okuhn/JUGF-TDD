@@ -23,7 +23,7 @@ public class ResultExampleTest {
 	}	
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void failureTest() {
 		LOG.debug("Before failure");
 		fail("Forced failure");
@@ -31,14 +31,14 @@ public class ResultExampleTest {
 	}	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void uncheckedExceptionTest() {
 		LOG.debug("before uncheckedException");
 		throw new RuntimeException("Forced error");
 	}	
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void checkedExceptionTest() throws Exception {
 		LOG.debug("before checkedException");
 		throw new Exception("Forced error");

@@ -25,6 +25,6 @@ public class SizeTest {
 	}
 
 	private List<String> buildList() {
-		return lp.list(4);
+		return lp.list(5);
 	}
 }
