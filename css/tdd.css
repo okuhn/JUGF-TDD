@@ -157,13 +157,10 @@ small, footer {
     height: 700px;
     padding: 40px 60px;
 
-/*
-    1ackground-color: rgba(255,255,255,0.1);
     background-color: rgba(0,0,0,0.1);
 	border: 1px solid rgba(0, 0, 0, .3);
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-*/
 }
 
 .slide q {
@@ -181,7 +178,7 @@ small, footer {
 #title footer {
 	display: block;
 	position: relative;
-	top: 150px;
+	top: 300px;
 }
 
 h1, h2 {
