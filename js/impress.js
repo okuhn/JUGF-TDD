@@ -564,6 +564,19 @@
             return goto(next);
         };
         
+        // `last` API function goes to last page
+        var last = function () {
+        	var last = steps[ steps.length-1 ];
+            return goto(last);
+        };
+        
+        // `first` API function goes to 1st page
+        var first = function () {
+        	var first = steps[ 0 ];
+            return goto(first);
+        };
+        
+        
         // Adding some useful classes to step elements.
         //
         // All the steps that have not been shown yet are given `future` class.
@@ -635,7 +648,9 @@
             init: init,
             goto: goto,
             next: next,
-            prev: prev
+            prev: prev,
+            last: last,
+            first: first
         });
 
     };
@@ -681,7 +696,7 @@
         
         // Prevent default keydown action when one of supported key is pressed.
         document.addEventListener("keydown", function ( event ) {
-            if ( event.keyCode === 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
+            if ( event.keyCode === 9 || event.keyCode === 49 || event.keyCode === 76 || event.keyCode === 108 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
                 event.preventDefault();
             }
         }, false);
@@ -702,7 +717,7 @@
         //   as another way to moving to next step... And yes, I know that for the sake of
         //   consistency I should add [shift+tab] as opposite action...
         document.addEventListener("keyup", function ( event ) {
-            if ( event.keyCode === 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
+            if ( event.keyCode === 9 || event.keyCode === 49 || event.keyCode === 76 || event.keyCode === 108 ||( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
                 switch( event.keyCode ) {
                     case 33: // pg up
                     case 37: // left
@@ -716,6 +731,13 @@
                     case 40: // down
                              api.next();
                              break;
+                    case 76:
+                    case 108:
+                    		api.last();
+                    		break;
+                    case 49:
+                    		api.first();
+                    		break;
                 }
                 
                 event.preventDefault();
