@@ -83,7 +83,7 @@ h2 {
 
 ul {
 	font-size: 36px;
-	list-style-position: inside;
+	list-style-position: outside;
 }
 
 small, footer {
@@ -182,8 +182,16 @@ small, footer {
 	top: 300px;
 }
 
-h1, h2 {
+h1 {
 	margin-bottom: 50px;
+}
+
+h2 {
+	margin-bottom: 30px;
+}
+
+h3 {
+	margin-bottom: 0px;
 }
 
 .center {
@@ -207,6 +215,10 @@ blockquote p {
 	margin-bottom: 100px;
 }
 
+.marginAfter {
+	margin-bottom: 100px;
+}
+
 a {
 	color: inherit;
 	font-style: inherit;
@@ -216,4 +228,42 @@ a {
 .margin1 {
 	margin-top: 40px;
 	margin-bottom: 40px;
+}
+
+code {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-family: 'Bitstream Vera Sans Mono', 'Courier New', 'Courier';
+	font-weight: bold;
+	text-shadow: none;
+}
+
+pre code {
+	font-size: 24px;
+}
+
+
+/* ==|== print styles =======================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+	* { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; } /* Black prints faster: h5bp.com/s */
+	a, a:visited { text-decoration: underline; }
+	a[href]:after { content: " (" attr(href) ")"; }
+	abbr[title]:after { content: " (" attr(title) ")"; }
+	.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
+	thead { display: table-header-group; } /* h5bp.com/t */
+	tr, img { page-break-inside: avoid; }
+	img { max-width: 100% !important; }
+	@page { margin: 0.5cm; }
+	p, h2, h3 { orphans: 3; widows: 3; }
+	h2, h3 { page-break-after: avoid; }
+
+ /* Impress.js specific */
+	 .fallback-message { display: none; }
+	 @page land {size: landscape;}
+ 	.step { page-break-inside: avoid; page-break-after: always; border: none; margin-top: 100px; }
+ 	.step img { max-height: 100%; }
 }

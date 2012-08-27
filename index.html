@@ -3,268 +3,342 @@
 
 <html lang="de">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=1024" />
-<title>Testgetriebene Entwicklung mit JUnit4 und Hamcrest
-	Matchern</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <title>Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern</title>
 
-<meta name="description"
-	content="JUGF-Talk Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern" />
-<meta name="author" content="Oliver Kuhn" />
+    <meta name="description"
+        content="JUGF-Talk Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern" />
+    <meta name="author" content="Oliver Kuhn" />
 
-<link href="css/tdd.css" rel="stylesheet" />
+    <link href="css/tdd.css" rel="stylesheet" />
+    <link href="css/solarized_dark.css" rel="stylesheet" >
 
+    <script src="js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body class="impress-not-supported">
 
-	<div id="impress">
+    <div id="impress">
 
-		<div id="title" class="step slide" data-x="-6000" data-y="0" data-scale="10">
-			<h1>Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern</h1>
-			<footer>Oliver Kuhn, Java User Group Frankfurt, 29.08.2012</footer>
-		</div>
+        <div id="title" class="step slide" data-x="-6000" data-y="0" data-scale="10">
+            <h1>Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern</h1>
+            <footer>Oliver Kuhn, Java User Group Frankfurt, 29.08.2012</footer>
+        </div>
 
-		<div id="content" class="step slide" data-x="6000" data-y="0" data-scale="10">
-		    <h1>Behandelte Themen</h1>
-			<ul>
-				<li>Motivation <i>Testgetriebene Entwicklung (TDD)</i></li>
-				<li>Grundlegende Features von JUnit4</li>
-				<li>Fortgeschrittene Features von JUnit4</li>
-				<li>Hamcrest Matcher</li>
-				<li>Ausblick</li>
-			</ul>
-		</div>
+        <div id="content" class="step slide" data-x="6000" data-y="0" data-scale="10">
+            <h1>Behandelte Themen</h1>
+            <ul>
+                <li>Motivation <i>Testgetriebene Entwicklung (TDD)</i></li>
+                <li>Grundlegende Features von JUnit4</li>
+                <li>Fortgeschrittene Features von JUnit4</li>
+                <li>Hamcrest Matcher</li>
+                <li>Ausblick</li>
+            </ul>
+        </div>
 
-		<div id="tdd" class="step slide" data-x="-9000" data-y="6000" data-scale="4">
-		    <h1 class="center"><i>Testgetriebene Entwicklung (TDD)</i></h1>
-		</div>
+        <div id="tdd" class="step slide" data-x="-9000" data-y="6000" data-scale="4">
+            <h1 class="center"><i>Testgetriebene Entwicklung (TDD)</i></h1>
+        </div>
 
-	    <div id="tdd1" class="step slide" data-x="-10500" data-y="6800" data-rotate="270" data-scale="1">
-			<blockquote>
- 	    		<p>&bdquo;Controlling complexity is the essence of computer programming.&ldquo;</p>
-	    		<footer>— <cite><a href="http://en.wikiquote.org/wiki/Brian_Kernighan">Brian W. Kernighan</a></cite></footer>
-	    	</blockquote>
-		</div>
+        <div id="tdd1" class="step slide" data-x="-10500" data-y="6800" data-rotate="270" data-scale="1">
+            <blockquote>
+                 <p>&bdquo;Controlling complexity is the essence of computer programming.&ldquo;</p>
+                <footer>— <cite><a href="http://en.wikiquote.org/wiki/Brian_Kernighan">Brian W. Kernighan</a></cite></footer>
+            </blockquote>
+        </div>
 
-	    <div id="tdd2" class="step slide" data-x="-10500" data-y="5300" data-rotate="270" data-scale="1">
-		    <h1>Wie Komplexität beherrschen?</h1>
-		    
-		    <h3>Hilfreiche Entwurfsprinzipien</h3>
-			<ul class="margin1">
-				<li><a href="http://de.wikipedia.org/wiki/Teile_und_herrsche_(Informatik)">Divide et Impera!</a></li>
-				<li><a href="http://en.wikipedia.org/wiki/Separation_of_concerns">Separation of concerns</a></li>
-			</ul>
-			<p>&rarr; Programmcode in kleine, überschaubare <i>Units</i> aufteilen, die genau eine Aufgabe erfüllen.</p>
-			<p>&rarr; In Java sind diese Units meist einzelne Klassen.</p>
-			<p>&rarr; Units können einzeln getestet werden.</p>
-		</div>
+        <div id="tdd2" class="step slide" data-x="-10500" data-y="5300" data-rotate="270" data-scale="1">
+            <h1>Wie Komplexität beherrschen?</h1>
+            
+            <h3>Hilfreiche Entwurfsprinzipien</h3>
+            <ul class="margin1">
+                <li><a href="http://de.wikipedia.org/wiki/Teile_und_herrsche_(Informatik)">Divide et Impera!</a></li>
+                <li><a href="http://en.wikipedia.org/wiki/Separation_of_concerns">Separation of concerns</a></li>
+            </ul>
+            <p>&rarr; Programmcode in kleine, überschaubare <i>Units</i> aufteilen, die genau eine Aufgabe erfüllen.</p>
+            <p>&rarr; In Java sind diese Units meist einzelne Klassen.</p>
+            <p>&rarr; Units können einzeln getestet werden.</p>
+        </div>
 
-	    <div id="tdd3" class="step slide" data-x="-9500" data-y="6800" data-rotate="270" data-scale="1">
-		    <h1>Vorgehensweise Testgetriebene Entwicklung</h1>
-			<ul class="margin2">
-				<li>API festlegen, aber noch nicht implementieren.</li>
-				<li>Test schreiben.</li>
-				<li>Test ausführen, Fehlschlag überprüfen.</li>
-				<li>Unit implementieren.</li>
-				<li>Test ausführen.</li>
-				<li>Implementierung anpassen, bis Test erfolgreich ist.</li>
-				<li>Gemeldete Fehler mit zusätzlichem Test nachstellen.</li>
-			</ul>
-		</div>
+        <div id="tdd3" class="step slide" data-x="-9500" data-y="6800" data-rotate="270" data-scale="1">
+            <h1>Vorgehensweise Testgetriebene Entwicklung</h1>
+            <ul class="margin2">
+                <li>API festlegen, aber noch nicht implementieren.</li>
+                <li>Test schreiben.</li>
+                <li>Test ausführen, Fehlschlag überprüfen.</li>
+                <li>Unit implementieren.</li>
+                <li>Test ausführen.</li>
+                <li>Implementierung anpassen, bis Test erfolgreich ist.</li>
+                <li>Gemeldete Fehler mit zusätzlichem Test nachstellen.</li>
+            </ul>
+        </div>
 
-	    <div id="tdd4" class="step slide" data-x="-9500" data-y="5300" data-rotate="270" data-scale="1">
-		    <h1>Vorteile Testgetriebene Entwicklung</h1>
-			<ul class="margin2">
-				<li>Aufteilung in einzelne Units und explizite Festlegung der API erhöht Codequalität.</li>
-				<li>Tests können nicht aus Zeitgründen weggelassen werden.</li>
-				<li>Gefahr der Querschläger bei Codeänderungen wird verringert.</li>
-				<li>Erleichtert notwendige Refactorings.</li>
-			</ul>
-		</div>
+        <div id="tdd4" class="step slide" data-x="-9500" data-y="5300" data-rotate="270" data-scale="1">
+            <h1>Vorteile Testgetriebene Entwicklung</h1>
+            <ul class="margin2">
+                <li>Aufteilung in einzelne Units und explizite Festlegung der API erhöht Codequalität.</li>
+                <li>Tests können nicht aus Zeitgründen weggelassen werden.</li>
+                <li>Gefahr der Querschläger bei Codeänderungen wird verringert.</li>
+                <li>Erleichtert notwendige Refactorings.</li>
+            </ul>
+        </div>
 
 <!-- 
-	    <div id="tdd5" class="step slide" data-x="-8500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 5</h2>		
-		</div>
+        <div id="tdd5" class="step slide" data-x="-8500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>TDD Slide 5</h2>        
+        </div>
 
-	    <div id="tdd6" class="step slide" data-x="-8500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 6</h2>		
-		</div>
+        <div id="tdd6" class="step slide" data-x="-8500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>TDD Slide 6</h2>        
+        </div>
 
-	    <div id="tdd7" class="step slide" data-x="-7500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 7</h2>		
-		</div>
-		
-	    <div id="tdd8" class="step slide" data-x="-7500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 8</h2>		
-		</div>
+        <div id="tdd7" class="step slide" data-x="-7500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>TDD Slide 7</h2>        
+        </div>
+        
+        <div id="tdd8" class="step slide" data-x="-7500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>TDD Slide 8</h2>        
+        </div>
  -->
-		
-		<div id="basics" class="step slide" data-x="-4500" data-y="6000" data-scale="4">
-		    <h2 class="center">Grundlegende Features von JUnit4</h2>
-		</div>
-		
-	    <div id="basics1" class="step slide" data-x="-6000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 1</h2>		
-		</div>
+        
+        <div id="basics" class="step slide" data-x="-4500" data-y="6000" data-scale="4">
+            <h2 class="center">Grundlegende Features von JUnit4</h2>
+        </div>
+        
+        <div id="basics1" class="step slide" data-x="-6000" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Unterschiede zwischen JUnit3 und JUnit4</h2>
+            <ul class="margin1">
+            	<li>JUnit4 verwendet Annotationen statt Vererbung.</li>
+            	<li>Erweitern der Klasse <i>TestCase</i> ist nicht notwendig.</li>
+            	<li>Methoden können frei benannt werden.</li>
+            	<li>Assertions sind jetzt statische Methoden der Klasse <i>Assert</i>.</li>
+            	<li>JUnit4 liegt im Package <code>org.junit</code> statt in <code>junit.framework</code>.</li>
+            	<li>JUnit4 ist abwärtskompatibel.</li>
+            </ul>  
+        </div>
 
-	    <div id="basics2" class="step slide" data-x="-6000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 2</h2>		
-		</div>
+        <div id="basics2" class="step slide" data-x="-6000" data-y="5300" data-rotate="270" data-scale="1">
+        		<h3>Beispiel JUnit3</h3>
+               	<pre>
+                <code>package de.jugf.tdd.basic;
 
-	    <div id="basics3" class="step slide" data-x="-5000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 3</h2>		
-		</div>
+import static de.jugf.tdd.basic.StringUtils.filterUmlaut;
+import junit.framework.TestCase;
 
-	    <div id="basics4" class="step slide" data-x="-5000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 4</h2>		
-		</div>
+public class StringUtilsTest3 extends TestCase {
+    public void testFilterUmlaut() {
+        assertEquals("Haeuser,Hoefe,Tueren", 
+                filterUmlaut("Häuser,Höfe,Türen"));
+    }
+}</code>
+            </pre>
+        </div>
 
-	    <div id="basics5" class="step slide" data-x="-4000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 5</h2>		
-		</div>
+        <div id="basics3" class="step slide" data-x="-5000" data-y="6800" data-rotate="270" data-scale="1">
+        		<h3>Beispiel JUnit4</h3>
+                <pre>
+                <code>package de.jugf.tdd.basic;
 
-	    <div id="basics6" class="step slide" data-x="-4000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 6</h2>		
-		</div>
+import static de.jugf.tdd.basic.StringUtils.filterUmlaut;
+import org.hamcrest.core.IsEqual;
+import org.junit.Assert;
+import org.junit.Test;
 
-	    <div id="basics7" class="step slide" data-x="-3000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 7</h2>		
-		</div>
+public class StringUtilsTest4 {
+    @Test
+    public void testFilterUmlaut() {
+        Assert.assertThat(filterUmlaut("Häuser,Höfe,Türen"),
+                IsEqual.equalTo("Haeuser,Hoefe,Tueren"));
+    }
+}</code>
+            </pre>
+        </div>
 
-	    <div id="basics8" class="step slide" data-x="-3000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Basics Slide 8</h2>		
-		</div>
+        <div id="basics4" class="step slide" data-x="-5000" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Methoden-Annotationen</h2>        
+          	<ul class="margin1">
+            	<li><code>@Test</code> - Methode implementiert einen Test.</li>
+            	<li><code>@Before</code> - Methode wird vor jedem Test ausgeführt.</li>
+            	<li><code>@After</code> - Methode wird nach jedem Test ausgeführt.</li>
+            	<li><code>@BeforeClass</code> - Statische Methode wird vor erstem Test ausgeführt.</li>
+            	<li><code>@AfterClass</code> - Methode wird nach letztem Test ausgeführt.</li>
+            	<li><code>@Ignore</code> - Test wird kurzzeitig (!) nicht ausgeführt.</li>
+            </ul>  
+        </div>
 
-		<div id="advanced" class="step slide" data-x="0" data-y="6000" data-scale="4">
-		    <h2 class="center">Fortgeschrittene Features von JUnit4</h2>
-		</div>
-		
-	    <div id="advanced1" class="step slide" data-x="-1500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 1</h2>		
-		</div>
+        <div id="basics5" class="step slide" data-x="-4000" data-y="6800" data-rotate="270" data-scale="1">
+            <h2><code>@Test</code> Parameter</h2>
+            <h3><code>timeout</code></h3>
+            <p class="marginAfter">Definiert die maximal zulässige Laufzeit eines Tests.</p>        
+            <h3><code>expectedException</code></h3>
+            <p>Legt fest, dass ein Test nur dann erfolgreich ist, wenn die angegebene <i>Exception</i> auftritt.</p>
+        </div>
 
-	    <div id="advanced2" class="step slide" data-x="-1500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 2</h2>		
-		</div>
+        <div id="basics6" class="step slide" data-x="-4000" data-y="5300" data-rotate="270" data-scale="1">
+          	<h2>Mögliche Testergebnisse</h2>        
+          	<ul class="margin1">
+            	<li>Erfolg.</li>
+            	<li><code>Failure</code> &rarr; Eine geforderte Zusicherung wurde nicht eingehalten.</li>
+            	<li><code>Error</code> &rarr; Ein Programmfehler führte zum abbruch des Tests.</li>
+            	<li><code>Ignore</code> &rarr; Der Test wurde bewußt ignoriert.</li>
+            </ul>  
+        </div>
 
-	    <div id="advanced3" class="step slide" data-x="-500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 3</h2>		
-		</div>
+        <div id="basics7" class="step slide" data-x="-3000" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Testsuiten</h2>
+            <p>Mit der <code>@SuiteClasses</code> Annotation in Verbindung mit <code>@RunWith</code> 
+            können Testsuiten zusammengestellt werden, die aus mehreren Tests bestehen.</p>
+            <pre>
+            <code>@RunWith(Suite.class)
+@SuiteClasses({StringUtilsTest3.class,StringUtilsTest4.class})
+public class StringUtilsSuiteTest {
+}</code>        
+            </pre>
+        </div>
 
-	    <div id="advanced4" class="step slide" data-x="-500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 4</h2>		
-		</div>
+        <div id="basics8" class="step slide" data-x="-3000" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Annahmen</h2>
+            <p>Mit <i>Assumptions</i> (Annahmen) lassen sich Vorbedingungen definieren, die erfüllt sein
+            müssen, damit der Test sinnvoll ausgeführt werden kann. Ist eine Annahme nicht erfüllt, 
+            so wird der Test abgebrochen, aber als erfolgreich gewertet.</p>
+            <pre>
+	            <code>Assume.assumeTrue(condition);
+Assume.assumeThat(value, matches);</code>
+            </pre>
+        </div>
 
-	    <div id="advanced5" class="step slide" data-x="500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 5</h2>		
-		</div>
+        <div id="advanced" class="step slide" data-x="0" data-y="6000" data-scale="4">
+            <h2 class="center">Fortgeschrittene Features von JUnit4</h2>
+        </div>
+        
+        <div id="advanced1" class="step slide" data-x="-1500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 1</h2>        
+        </div>
 
-	    <div id="advanced6" class="step slide" data-x="500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 6</h2>		
-		</div>
+        <div id="advanced2" class="step slide" data-x="-1500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 2</h2>        
+        </div>
 
-	    <div id="advanced7" class="step slide" data-x="1500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 7</h2>		
-		</div>
+        <div id="advanced3" class="step slide" data-x="-500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 3</h2>        
+        </div>
 
-	    <div id="advanced8" class="step slide" data-x="1500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>JUnit4 Advanced Slide 8</h2>		
-		</div>
+        <div id="advanced4" class="step slide" data-x="-500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 4</h2>        
+        </div>
 
-		<div id="hamcrest" class="step slide" data-x="4500" data-y="6000" data-scale="4">
-		    <h1 class="center">Hamcrest Matcher</h1>
-		</div>
+        <div id="advanced5" class="step slide" data-x="500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 5</h2>        
+        </div>
 
-	    <div id="hamcrest1" class="step slide" data-x="3000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 1</h2>		
-		</div>
+        <div id="advanced6" class="step slide" data-x="500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 6</h2>        
+        </div>
 
-	    <div id="hamcrest2" class="step slide" data-x="3000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 2</h2>		
-		</div>
+        <div id="advanced7" class="step slide" data-x="1500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 7</h2>        
+        </div>
 
-	    <div id="hamcrest3" class="step slide" data-x="4000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 3</h2>		
-		</div>
+        <div id="advanced8" class="step slide" data-x="1500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>JUnit4 Advanced Slide 8</h2>        
+        </div>
 
-	    <div id="hamcrest4" class="step slide" data-x="4000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 4</h2>		
-		</div>
+        <div id="hamcrest" class="step slide" data-x="4500" data-y="6000" data-scale="4">
+            <h1 class="center">Hamcrest Matcher</h1>
+        </div>
 
-	    <div id="hamcrest5" class="step slide" data-x="5000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 5</h2>		
-		</div>
+        <div id="hamcrest1" class="step slide" data-x="3000" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 1</h2>        
+        </div>
 
-	    <div id="hamcrest6" class="step slide" data-x="5000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 6</h2>		
-		</div>
+        <div id="hamcrest2" class="step slide" data-x="3000" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 2</h2>        
+        </div>
 
-	    <div id="hamcrest7" class="step slide" data-x="6000" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 7</h2>		
-		</div>
-		
-	    <div id="hamcrest8" class="step slide" data-x="6000" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>Hamcrest Matcher Slide 8</h2>		
-		</div>
-		
-		<div id="next" class="step slide" data-x="9000" data-y="6000" data-scale="4">
-		    <h1 class="center">Ausblick</h1>
-		</div>
-		
-	    <div id="next1" class="step slide" data-x="7500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>Ausblick Slide 1</h2>		
-		</div>
+        <div id="hamcrest3" class="step slide" data-x="4000" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 3</h2>        
+        </div>
 
-	    <div id="next2" class="step slide" data-x="7500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>Ausblick Slide 2</h2>		
-		</div>
+        <div id="hamcrest4" class="step slide" data-x="4000" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 4</h2>        
+        </div>
 
-	    <div id="next3" class="step slide" data-x="8500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>Ausblick Slide 3</h2>		
-		</div>
+        <div id="hamcrest5" class="step slide" data-x="5000" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 5</h2>        
+        </div>
 
-	    <div id="next4" class="step slide" data-x="8500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>Ausblick Slide 4</h2>		
-		</div>
+        <div id="hamcrest6" class="step slide" data-x="5000" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 6</h2>        
+        </div>
 
-	    <div id="next5" class="step slide" data-x="9500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>Ausblick Slide 5</h2>		
-		</div>
+        <div id="hamcrest7" class="step slide" data-x="6000" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 7</h2>        
+        </div>
+        
+        <div id="hamcrest8" class="step slide" data-x="6000" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Hamcrest Matcher Slide 8</h2>        
+        </div>
+        
+        <div id="next" class="step slide" data-x="9000" data-y="6000" data-scale="4">
+            <h1 class="center">Ausblick</h1>
+        </div>
+        
+        <div id="next1" class="step slide" data-x="7500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Ausblick Slide 1</h2>        
+        </div>
 
-	    <div id="next6" class="step slide" data-x="9500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>Ausblick Slide 6</h2>		
-		</div>
+        <div id="next2" class="step slide" data-x="7500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Ausblick Slide 2</h2>        
+        </div>
 
-	    <div id="next7" class="step slide" data-x="10500" data-y="6800" data-rotate="270" data-scale="1">
-		    <h2>Eingesetzte Tools zur Erstellung der Präsentation</h2>
-    		<ul>
-				<li>impress.js <a href="https://github.com/bartaz/impress.js">https://github.com/bartaz/impress.js</a></li>
-      			<li>highlight.js <a href="http://softwaremaniacs.org/soft/highlight/en/">http://softwaremaniacs.org/soft/highlight/en/</a></li>
-      			<li>GitHub <a href="https://github.com/">https://github.com/</a></li>
-    		</ul>
-		</div>
+        <div id="next3" class="step slide" data-x="8500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Ausblick Slide 3</h2>        
+        </div>
 
-	    <div id="next8" class="step slide" data-x="10500" data-y="5300" data-rotate="270" data-scale="1">
-	    	<h1>Fragen ?</h1>
-    		<ul>
-				<li>Die Präsentation ist online verfügbar unter <a href="http://okuhn.github.com/JUGF-TDD">http://okuhn.github.com/JUGF-TDD</a></li>
-      			<li>Alle Beispiele sind verfügbar unter <a href="https://github.com/okuhn/JUGF-TDD">https://github.com/okuhn/JUGF-TDD</a></li>
-      			<li>Mail: oliver.kuhn@web.de</li> 
-      			<li>Twitter: @okuhn</li>
-    		</ul>
-		</div>
+        <div id="next4" class="step slide" data-x="8500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Ausblick Slide 4</h2>        
+        </div>
 
-		<div id="overview" class="step" data-x="0" data-y="2000" data-scale="20"></div>
-	</div>
+        <div id="next5" class="step slide" data-x="9500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Ausblick Slide 5</h2>        
+        </div>
 
-	<div id="timer"></div>
+        <div id="next6" class="step slide" data-x="9500" data-y="5300" data-rotate="270" data-scale="1">
+            <h2>Ausblick Slide 6</h2>        
+        </div>
 
-	<script src="js/impress.js"></script>
-	<script>
-		impress().init();
-	</script>
+        <div id="next7" class="step slide" data-x="10500" data-y="6800" data-rotate="270" data-scale="1">
+            <h2>Eingesetzte Tools zur Erstellung der Präsentation</h2>
+            <ul>
+                <li>impress.js <a href="https://github.com/bartaz/impress.js">https://github.com/bartaz/impress.js</a></li>
+                  <li>highlight.js <a href="http://softwaremaniacs.org/soft/highlight/en/">http://softwaremaniacs.org/soft/highlight/en/</a></li>
+                  <li>GitHub <a href="https://github.com/">https://github.com/</a></li>
+            </ul>
+        </div>
+
+        <div id="next8" class="step slide" data-x="10500" data-y="5300" data-rotate="270" data-scale="1">
+            <h1>Fragen ?</h1>
+            <ul>
+                <li>Die Präsentation ist online verfügbar unter <a href="http://okuhn.github.com/JUGF-TDD">http://okuhn.github.com/JUGF-TDD</a></li>
+                  <li>Alle Beispiele sind verfügbar unter <a href="https://github.com/okuhn/JUGF-TDD">https://github.com/okuhn/JUGF-TDD</a></li>
+                  <li>Mail: oliver.kuhn@web.de</li> 
+                  <li>Twitter: @okuhn</li>
+            </ul>
+        </div>
+
+        <div id="overview" class="step" data-x="0" data-y="2000" data-scale="20"></div>
+    </div>
+
+    <div id="timer"></div>
+
+    <script src="js/impress.js"></script>
+    <script>
+	    if ( !window.location.search.match(/print/) ) {
+	        impress().init();
+	    }
+    </script>
 
 
 </body>
