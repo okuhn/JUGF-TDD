@@ -41,21 +41,49 @@
 		</div>
 
 	    <div id="tdd1" class="step slide" data-x="-10500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 1</h2>		
+			<blockquote>
+ 	    		<p>&bdquo;Controlling complexity is the essence of computer programming.&ldquo;</p>
+	    		<footer>— <cite><a href="http://en.wikiquote.org/wiki/Brian_Kernighan">Brian W. Kernighan</a></cite></footer>
+	    	</blockquote>
 		</div>
 
 	    <div id="tdd2" class="step slide" data-x="-10500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 2</h2>		
+		    <h1>Wie Komplexität beherrschen?</h1>
+		    
+		    <h3>Hilfreiche Entwurfsprinzipien</h3>
+			<ul class="margin1">
+				<li><a href="http://de.wikipedia.org/wiki/Teile_und_herrsche_(Informatik)">Divide et Impera!</a></li>
+				<li><a href="http://en.wikipedia.org/wiki/Separation_of_concerns">Separation of concerns</a></li>
+			</ul>
+			<p>&rarr; Programmcode in kleine, überschaubare <i>Units</i> aufteilen, die genau eine Aufgabe erfüllen.</p>
+			<p>&rarr; In Java sind diese Units meist einzelne Klassen.</p>
+			<p>&rarr; Units können einzeln getestet werden.</p>
 		</div>
 
 	    <div id="tdd3" class="step slide" data-x="-9500" data-y="6800" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 3</h2>		
+		    <h1>Vorgehensweise Testgetriebene Entwicklung</h1>
+			<ul class="margin2">
+				<li>API festlegen, aber noch nicht implementieren.</li>
+				<li>Test schreiben.</li>
+				<li>Test ausführen, Fehlschlag überprüfen.</li>
+				<li>Unit implementieren.</li>
+				<li>Test ausführen.</li>
+				<li>Implementierung anpassen, bis Test erfolgreich ist.</li>
+				<li>Gemeldete Fehler mit zusätzlichem Test nachstellen.</li>
+			</ul>
 		</div>
 
 	    <div id="tdd4" class="step slide" data-x="-9500" data-y="5300" data-rotate="270" data-scale="1">
-			<h2>TDD Slide 4</h2>		
+		    <h1>Vorteile Testgetriebene Entwicklung</h1>
+			<ul class="margin2">
+				<li>Aufteilung in einzelne Units und explizite Festlegung der API erhöht Codequalität.</li>
+				<li>Tests können nicht aus Zeitgründen weggelassen werden.</li>
+				<li>Gefahr der Querschläger bei Codeänderungen wird verringert.</li>
+				<li>Erleichtert notwendige Refactorings.</li>
+			</ul>
 		</div>
 
+<!-- 
 	    <div id="tdd5" class="step slide" data-x="-8500" data-y="6800" data-rotate="270" data-scale="1">
 			<h2>TDD Slide 5</h2>		
 		</div>
@@ -71,6 +99,7 @@
 	    <div id="tdd8" class="step slide" data-x="-7500" data-y="5300" data-rotate="270" data-scale="1">
 			<h2>TDD Slide 8</h2>		
 		</div>
+ -->
 		
 		<div id="basics" class="step slide" data-x="-4500" data-y="6000" data-scale="4">
 		    <h2 class="center">Grundlegende Features von JUnit4</h2>
