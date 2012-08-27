@@ -14,13 +14,13 @@ import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
-import de.jugf.tdd.basic.AkkuFibonacciService;
 import de.jugf.tdd.basic.FibonacciService;
+import de.jugf.tdd.basic.SimpleFibonacciService;
+import de.jugf.tdd.runner.JugfParameterized;
+import de.jugf.tdd.runner.JugfParameterized.Parameters;
 
-@RunWith(Parameterized.class)
+@RunWith(JugfParameterized.class)
 public class FibonacciTest {
 	
 	private static final Log LOG = LogFactory.getLog(FibonacciTest.class);
@@ -36,10 +36,10 @@ public class FibonacciTest {
 				{5L, 5L},
 				{19L, 4181L},
 				{26L, 121393L},
-				{40L, 102334155L },
-				{45L, 1134903170L },
-				{49L, 7778742049L },
-				{50L, 12586269025L },
+//				{40L, 102334155L },
+//				{45L, 1134903170L },
+//				{49L, 7778742049L },
+//				{50L, 12586269025L },
 				{-10L, null}
 		});
 	}
@@ -47,7 +47,7 @@ public class FibonacciTest {
 	private final Long arg; 
 	private final Long expectedResult;
 	
-	private FibonacciService service = new AkkuFibonacciService();
+	private FibonacciService service = new SimpleFibonacciService();
 	
 	public FibonacciTest(Long arg, Long expectedResult) {
 		this.arg = arg;
