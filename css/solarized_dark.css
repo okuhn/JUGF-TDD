@@ -79,8 +79,9 @@ pre .clojure .title {
   color: #cb4b16;
 }
 
-pre .deletion {
-  color: #dc322f;
+pre .deletion,
+pre .annotation {
+  color: #dca28f;
 }
 
 pre .tex .formula {

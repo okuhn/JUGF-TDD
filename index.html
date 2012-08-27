@@ -214,61 +214,147 @@ Assume.assumeThat(value, matches);</code>
         </div>
         
         <div id="advanced1" class="step slide" data-x="-1500" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>JUnit4 Advanced Slide 1</h2>        
+            <h2>Testrunner</h2>        
+            <p>Mit der <code>@RunWith</code> Annotation kann bestimmt werden, welche Klasse den Test ausführt.</p>
+            <h2>Beispiele</h2>
+          	<ul>
+            	<li><code>@RunWith(Parameterized.class)</code></li>
+            	<li><code>@RunWith(Theories.class)</code></li>
+            	<li><code>@RunWith(SpringJUnit4ClassRunner.class)</code></li>
+            	<li><code>@RunWith(MyOwnRunner.class)</code></li>
+            </ul>
         </div>
 
         <div id="advanced2" class="step slide" data-x="-1500" data-y="5300" data-rotate="270" data-scale="1">
-            <h2>JUnit4 Advanced Slide 2</h2>        
+            <h3>Beispiel mit <i>SpringJUnit4ClassRunner</i></h3>
+            <pre>
+            <code>@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:testContext.xml"})
+@Transactional
+@TransactionConfiguration(
+	transactionManager="test.transactionManager",
+	defaultRollback=true)
+public class DatabaseTest {
+	@Autowired private ValueDAO dao;
+	@Before	void init() { setupTestDB(); }
+	@Test public void testDB() {
+		assertThat(dao.load(id), matchesExpected());
+	}
+	...
+}</code>
+            </pre>        
         </div>
 
         <div id="advanced3" class="step slide" data-x="-500" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>JUnit4 Advanced Slide 3</h2>        
+            <h2>Parametrisierte Tests</h2>
+            <p>Tests können mittels Parametern mit verschiedenen Eingabeparametern ausgeführt werden.
+            Sie lassen sich parametrisieren, indem die Testklasse mit 
+            <code>@RunWith(Parameterized.class)</code> annotiert wird.
+            Zusätzlich muss eine statische Methode mit <code>@Parameters</code> annotiert werden, die alle zu verwendenden Parameter liefert.
+            </p>       
         </div>
 
         <div id="advanced4" class="step slide" data-x="-500" data-y="5300" data-rotate="270" data-scale="1">
-            <h2>JUnit4 Advanced Slide 4</h2>        
+            <h2>Theorien</h2>
+            <ul>
+	            <li>Bei einer <i>Theorie</i> soll überprüft werden, ob bestimmte Aussagen für beliebige Eingabewerte zutreffen.</li>
+	            <li>Dazu wird ein Test mit möglichst vielen, repräsentativen Eingabewerten ausgeführt.</li>
+            </ul>
         </div>
 
         <div id="advanced5" class="step slide" data-x="500" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>JUnit4 Advanced Slide 5</h2>        
+            <h2><code>@Rule</code> und <code>@ClassRule</code></h2>
+            <ul>
+            	<li>AOP-artiger Mechanismus, um den Aufruf von Methoden mittels <i>Interceptor</i> zu steuern</li>
+            	<li>Beispiel: <code>ErrorCollector</code> ermöglicht es, nach einem Fehler den Test fortzusetzen 
+            	und am Ende alle aufgetretenen Fehler anzuzeigen.</li>
+            	<li><code>@Rule</code> funktioniert nicht mit statischen Methoden, dafür wurde <code>@ClassRule</code> eingeführt.</li>
+            </ul>        
         </div>
-
         <div id="advanced6" class="step slide" data-x="500" data-y="5300" data-rotate="270" data-scale="1">
-            <h2>JUnit4 Advanced Slide 6</h2>        
+            <h2>Categories</h2>
+            <ul>
+            	<li>Ermöglicht es, Testklassen und Testmethoden Kategorien zuzuordnen.</li>
+            	<li><pre><code>@Category(MyCategory.class)
+  @Test
+  public void b() {
+  }</code></pre>
+            	<li>Mittels <code>@IncludeCategory(MyCategory.class)</code> und <code>@IncludeCategory(MyCategory.class)</code>
+            	können die in einer Testsuite ausgeführten Tests konkretisiert werden.</li>
+            </ul>        
         </div>
 
+<!-- 
         <div id="advanced7" class="step slide" data-x="1500" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>JUnit4 Advanced Slide 7</h2>        
+            <h2>Categories</h2>        
         </div>
 
         <div id="advanced8" class="step slide" data-x="1500" data-y="5300" data-rotate="270" data-scale="1">
             <h2>JUnit4 Advanced Slide 8</h2>        
         </div>
+ -->
 
         <div id="hamcrest" class="step slide" data-x="4500" data-y="6000" data-scale="4">
             <h1 class="center">Hamcrest Matcher</h1>
         </div>
 
         <div id="hamcrest1" class="step slide" data-x="3000" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>Hamcrest Matcher Slide 1</h2>        
+            <h2>Hamcrest Matcher</h2>
+            <ul>
+            	<li>Objekte, die eine zu überprüfende Bedingung repräsentieren.</li>
+            	<li>Separates Open Source Projekt ausserhalb von JUnit.
+            		<cite>
+            			<a href="http://code.google.com/p/hamcrest/">http://code.google.com/p/hamcrest/</a>
+            		</cite>
+            	</li>
+            	<li>Innerhalb von JUnit4 mit <i>Assertions</i> und <i>Assumptions</i> einsetzbar.</li>
+            </ul>        
         </div>
 
         <div id="hamcrest2" class="step slide" data-x="3000" data-y="5300" data-rotate="270" data-scale="1">
-            <h2>Hamcrest Matcher Slide 2</h2>        
+            <h2>Vorteile</h2>
+            <ul>
+            	<li>Gut lesbare Tests, ähnlich englischer Prosa.</li>
+            	<li>Bessere Fehlermeldungen.</li>
+            	<li>Große Anzahl Matcher out-of-the-box verfügbar.</li>
+            	<li>Leicht um eigene Matcher erweiterbar.</li>
+            </ul>        
         </div>
 
         <div id="hamcrest3" class="step slide" data-x="4000" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>Hamcrest Matcher Slide 3</h2>        
+            <h2>Verfügbare Hamcrest Matcher</h2>
+            <p>Die Hamcrest-Bibliothek enthält Matcher für die folgenden Bereiche.</p>
+            <ul>
+            	<li>beans</li>
+            	<li>collection</li>
+            	<li>number</li>
+            	<li>object</li>
+            	<li>text</li>
+            	<li>xml</li>
+            </ul>        
         </div>
 
         <div id="hamcrest4" class="step slide" data-x="4000" data-y="5300" data-rotate="270" data-scale="1">
-            <h2>Hamcrest Matcher Slide 4</h2>        
+            <h2>Eigene Hamcrest Matcher</h2>
+            <ul>
+            	<li><code>TypeSafeMatcher</code> erweitern.</li>
+            	<li>Finale Variablen für den Zustand definieren.</li>
+            	<li>Konstruktor zu diesen Variablen generieren lassen.</li> 
+            	<li><code>describeTo</code> mit Beschreibung der erwarteten Eigenschaften implementieren.</li>
+            	<li><code>matchesSafely</code> implementieren.</li>
+            	<li>Statische Factory-Methode definieren</li>
+            </ul>        
         </div>
 
         <div id="hamcrest5" class="step slide" data-x="5000" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>Hamcrest Matcher Slide 5</h2>        
+            <h2>Dependency Management</h2>
+            <ul>
+	            <li>Nicht <code>junit/junit</code> verwenden, sondern <code>junit/junit-dep</code>.</li>
+	            <li>Zusätzlich <code>org.hamcrest/hamcrest-core</code> und <code>org.hamcrest/hamcrest-library</code> verwenden.</li>
+            </ul>
         </div>
 
+<!-- 
         <div id="hamcrest6" class="step slide" data-x="5000" data-y="5300" data-rotate="270" data-scale="1">
             <h2>Hamcrest Matcher Slide 6</h2>        
         </div>
@@ -280,15 +366,23 @@ Assume.assumeThat(value, matches);</code>
         <div id="hamcrest8" class="step slide" data-x="6000" data-y="5300" data-rotate="270" data-scale="1">
             <h2>Hamcrest Matcher Slide 8</h2>        
         </div>
+ -->
         
         <div id="next" class="step slide" data-x="9000" data-y="6000" data-scale="4">
             <h1 class="center">Ausblick</h1>
         </div>
         
         <div id="next1" class="step slide" data-x="7500" data-y="6800" data-rotate="270" data-scale="1">
-            <h2>Ausblick Slide 1</h2>        
+            <h2>Was fehlt noch?</h2>
+            <ul>
+				<li>Builds mit <b>Maven, Gradle, ...</b></li>
+				<li>Continuous Integration mit <b>Jenkins, Continuum, ...</b></li>
+				<li>Mock Objekte verwenden <b>Mockito, Easymock, ...</b></li>
+				<li>GUI-Tests <b>Selenium, ...</b></li>
+				<li>Datenbank-Tests mit <b>dbUnit</b></li>
+            </ul>        
         </div>
-
+<!-- 
         <div id="next2" class="step slide" data-x="7500" data-y="5300" data-rotate="270" data-scale="1">
             <h2>Ausblick Slide 2</h2>        
         </div>
@@ -308,6 +402,7 @@ Assume.assumeThat(value, matches);</code>
         <div id="next6" class="step slide" data-x="9500" data-y="5300" data-rotate="270" data-scale="1">
             <h2>Ausblick Slide 6</h2>        
         </div>
+ -->
 
         <div id="next7" class="step slide" data-x="10500" data-y="6800" data-rotate="270" data-scale="1">
             <h2>Eingesetzte Tools zur Erstellung der Präsentation</h2>
