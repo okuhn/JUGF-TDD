@@ -1,4 +1,4 @@
-package de.jugf.tdd.misc;
+package de.jugf.tdd.rules;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
-public class UsesErrorCollectorTwice {
+public class ErrorCollectorTest {
 	@Rule
 	public ErrorCollector collector = new ErrorCollector();
 

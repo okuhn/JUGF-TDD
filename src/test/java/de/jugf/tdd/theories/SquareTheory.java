@@ -9,13 +9,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.experimental.theories.DataPoint;
-import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 import de.jugf.tdd.basic.DemoService;
+import de.jugf.tdd.runner.LongRunningTheories;
+import de.jugf.tdd.runner.LongRunningTheories.LongRunning;
 
-@RunWith(Theories.class)
+@RunWith(LongRunningTheories.class)
 public class SquareTheory {
 	
 	private static final Log LOG = LogFactory.getLog(SquareTheory.class);	
@@ -52,5 +53,17 @@ public class SquareTheory {
 		assertThat(result, equalTo(x));
 		
 		LOG.debug("theory succeeds for " + x);
+	}
+	
+	@Theory
+	@LongRunning
+	public void longRunningTheory(final double x) throws InterruptedException {
+		LOG.debug("checking longRunningTheory for value " + x);
+		doSomething();
+		LOG.debug("finished checking longRunningTheory for value " + x);
+	}
+
+	private void doSomething() throws InterruptedException {
+		Thread.sleep(1000);
 	}
 }
