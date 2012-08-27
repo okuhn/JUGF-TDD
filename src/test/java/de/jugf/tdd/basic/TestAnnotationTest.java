@@ -9,9 +9,9 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SpecialTest {
+public class TestAnnotationTest {
 
-	private static final Log LOG = LogFactory.getLog(SpecialTest.class);
+	private static final Log LOG = LogFactory.getLog(TestAnnotationTest.class);
 	
 	private DemoService service;
 	

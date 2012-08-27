@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({StandardAnnotationsTest.class, SpecialTest.class})
-public class MySuiteTest {
+@SuiteClasses({StringUtilsTest3.class, StringUtilsTest4.class})
+public class StringUtilsSuiteTest {
 }
