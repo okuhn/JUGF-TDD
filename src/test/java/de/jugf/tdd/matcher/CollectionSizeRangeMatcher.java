@@ -6,14 +6,14 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class CollectionSizeRangeMatcher extends TypeSafeMatcher<Collection<String>>
-		implements Matcher<Collection<String>> {
+public class CollectionSizeRangeMatcher<T> extends TypeSafeMatcher<Collection<? extends T>>
+		implements Matcher<Collection<? extends T>> {
 
 	private final int lowerBound;
 	private final int upperBound;
 	
-	public static CollectionSizeRangeMatcher collectionWithinSizeRange(final int lower, final int upper) {
-		return new CollectionSizeRangeMatcher(lower, upper);
+	public static <X> CollectionSizeRangeMatcher<X> collectionWithinSizeRange(final int lower, final int upper) {
+		return new CollectionSizeRangeMatcher<X>(lower, upper);
 	}
 
 	public CollectionSizeRangeMatcher(int lowerBound, int upperBound) {
@@ -29,9 +29,8 @@ public class CollectionSizeRangeMatcher extends TypeSafeMatcher<Collection<Strin
 	}
 
 	@Override
-	protected boolean matchesSafely(final Collection<String> collection) {
+	protected boolean matchesSafely(final Collection<? extends T> collection) {
 		return collection.size() >= lowerBound
 				&& collection.size() <= upperBound;
 	}
-
 }
