@@ -1,6 +1,6 @@
 ## Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern
 
-Hier liegen die Materialien zum Talk *Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern*, 
+Hier liegen die Materialien zum Talk [*Testgetriebene Entwicklung mit JUnit4 und Hamcrest Matchern*](http://okuhn.github.com/JUGF-TDD), 
 den ich am [29.08.2012](https://sites.google.com/site/jugffm/home/29-08-2012-testgetriebene-entwicklung-mit-junit4-und-hamcrest-matchern) 
 um 18:30 Uhr bei der [JUG Frankfurt](http://www.jugf.de) in der [Deutschen Nationalbibliothek](http://www.d-nb.de/) gehalten habe.
 
