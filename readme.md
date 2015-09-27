@@ -21,7 +21,7 @@ mit deren Hilfe innerhalb von Unittests Ergebnisse überprüft werden können.
 Beim Stammtisch wurde nach einer kurzen Einführung in die Grundlagen der testgetriebenen Entwicklung 
 anhand einiger Beispiele der Einsatz von JUnit 4 gezeigt. 
 Dabei beschäftigten wir uns mit einigen fortgeschrittenen Funktionalitäten, 
-darunter TestRunner, Theorien, Parameter un Rules. 
+darunter TestRunner, Theorien, Parameter und Rules. 
 Weiterhin wurde gezeigt, wie mit Hamcrest-Matchern die Lesbarkeit von Zusicherungen erhöht 
 sowie die Aussagekraft von Fehlermeldungen verbessert werden kann.
 
@@ -32,3 +32,4 @@ einem führenden Anbieter von Software für das Kredit- und Forderungsmanagement
 derzeit als technischer Architekt für die Produkte des Forderungsmanagements. 
 Zuvor studierte er Informatik an der TH Darmstadt (heute [TU Darmstadt](http://www.tu-darmstadt.de)) 
 mit dem Schwerpunkt Programmiersprachen und Compilerbau.
+
